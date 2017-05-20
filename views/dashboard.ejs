@@ -1,5 +1,29 @@
 <script src="./javascripts/APIHandler.js"></script>
 <script src="./javascripts/ajaxcalls.js"></script>
-<p>
-  test
-</p>
+
+<div class=container>
+  <div class="main">
+    <% messages.forEach((message) => { %>
+          <div class="element ">
+            <div class="cell<%=message.size%>"><p>
+              <%= message.text %>
+            </p>
+            <div class="button-container">
+              <a class="button" href="#"  />Donate</a>
+              <div class="voting">
+                <a class="button glyphicon glyphicon-chevron-up" href="#"></a>
+                <h6>
+                  <%= message.score %>
+                </h6>
+                <a class="button glyphicon glyphicon-chevron-down" href="#"></a>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          </div>
+    <% }) %>
+  </div>
+</div>

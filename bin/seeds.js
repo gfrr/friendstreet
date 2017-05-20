@@ -26,7 +26,7 @@ function fakeMessage(max){
       tags: [],
       loc: fakeCords(),
       radius: 2000,
-      size: "1"
+      size: String(Math.floor(Math.random()*3)+1)
     });
   }
   return fake;
