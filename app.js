@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var expressLayouts = require("express-ejs-layouts");
 var index = require('./routes/index');
 var users = require('./routes/users');
+var apiRouter = require("./routes/api-controller");
 
 var app = express();
 var mongoose = require("mongoose");
