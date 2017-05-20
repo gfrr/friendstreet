@@ -1,5 +1,5 @@
+</script>
 <div class="container-fluid">
-
 <h2>Post a Square </h2>
 <hr>
 <form action="/post_b" method="post">
@@ -26,6 +26,7 @@
       <option value="medium">10 km</option>
       <option value="long">20 km</option>
     </select>  </div>
+
   <div class="column">
     <label for="size">Ad Size</label>
     <select name="size">
@@ -44,6 +45,23 @@
   </div>
 </div>
 
+<div class="row">
+<div class="column">
+  <label for="radius">Cost</label>
+  <p id="priceRadius">0</p>
+</div>
+
+<div class="column">
+  <label for="size">Cost</label>
+  <p id="priceSize">0</p>
+</div>
+<div class="column">
+  <label for="duration">Cost</label>
+  <p id="priceDuration">0</p>
+</div>
+</div>
+
+
     <div class="row">
       <div class="column">
         <input class="button-primary" type="submit" value="Post">
@@ -53,3 +71,14 @@
 </form>
 
 </div>
+<script type="text/javascript">
+function updatePrice() {
+  if ($('#individual').is(':checked')) {
+    $('#register_link').replaceWith('<strong><a href=\"/signup_i\">Register!</a></strong>');
+  }
+  if ($('#business').is(':checked')) {
+    var link = "\"/signup_b\""
+    $('#register_link').replaceWith('<strong><a href=\"/signup_b\">Register!</a></strong>');
+  }
+}
+</script>

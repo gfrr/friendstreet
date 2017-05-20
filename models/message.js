@@ -10,7 +10,6 @@ const messageSchema = new Schema({
     type:{type:String},
     coordinates:[Number]
   },
-  coordinates : [Number, Number],
   radius      : {type:Number, default:2000},
   expire      : {type:Boolean, default:false},
   size        : {
@@ -18,6 +17,7 @@ const messageSchema = new Schema({
     enum: ["1","2","3"],
     default: "1"
   },
+  duration    : Number,
   userId: { type: Schema.Types.ObjectId, ref: 'User' }
 
 }, {timestamps: {

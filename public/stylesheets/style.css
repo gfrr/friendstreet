@@ -3,9 +3,25 @@
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }*/
 
+/* Larger than mobile screen */
+@media (min-width: 40.0rem) { ... }
+
+/* Larger than tablet screen */
+@media (min-width: 80.0rem) { ... }
+
+/* Larger than desktop screen */
+@media (min-width: 120.0rem) { ... }
+
+*{
+  box-sizing: border-box;
+
+}
+
 a {
   font-size: 28px;
 }
+
+
 
 h1, h2, h3, p {
   text-align: center;
@@ -28,15 +44,58 @@ hr {
   margin: 0 auto;
 }
 
+.voting {
+  height: 80px;
+  width: 200px;
+}
+
 .container-fluid {
   width: 70%;
   margin: 0 auto;
   text-align: center;
 }
 
+.main {
+  display: flex;
+  flex-flow: column;
+}
+
+.element {
+  display: flex;
+  flex-flow: column;
+
+  border: 1px solid purple;
+}
+
+.cell1 {
+  flex: 1;
+  color: black;
+  height: 150px;
+  background-color: white;
+}
+
+.cell2{
+
+  height: 250px;
+  flex:4;
+  color: black;
+  background-color: white;
+}
+
+.cell3{
+  flex:6;
+  height: 400px;
+  color: black;
+  background-color: white;
+}
 .row {
   width: 70%;
   margin: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 input {
@@ -63,6 +122,10 @@ input[type="checkbox"]{
 input[type="radio"]{
   width: 30px; /*Desired width*/
   height: 30px; /*Desired height*/
+}
+
+input[type="password"]{
+  height: 50px !important;/*Desired height*/
 }
 
 .font-style {
