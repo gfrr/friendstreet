@@ -8,7 +8,8 @@ var expressLayouts = require("express-ejs-layouts");
 
 
 var index = require('./routes/index');
-var apiRouter = require("./routes/apiController");
+
+var apiRouter = require("./routes/api-controller");
 
 const session = require("express-session");
 const flash = require("connect-flash");
@@ -57,6 +58,7 @@ app.set('layout', 'layouts/main-layout');
 
 app.use("/api", apiRouter);
 app.use('/', index);
+
 
 app.use('/',authController);
 

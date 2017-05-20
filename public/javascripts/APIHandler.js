@@ -5,9 +5,10 @@ class APIHandler {
 
 
 
-  getFullList (types) {
+  getFullList (types, location = undefined) {
+    const url = location ? this.BASE_URL + "/api/" + types + "?q=" + location : this.BASE_URL + "/api/" + types;
     $.ajax ({
-      url: this.BASE_URL + "/api/" + types,
+      url: url,
       method: "GET",
       dataType: "json",
       success: (response)=> {

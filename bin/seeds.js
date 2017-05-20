@@ -9,8 +9,28 @@ const Message = require("../models/message");
 
 
 mongoose.connect("mongodb://localhost:27017/friendstreet");
+function fakeCords() {
 
-//returns an array of random users with the userType role
+  return [(41.390205 - ((Math.random()* 100)/100)), (2.154007 - ((Math.random()* 100)/100))];
+}
+
+function fakeMessage(max){
+  let fake = [];
+  for (let i = 0; i < max; i++){
+    fake.push({
+      text: faker.lorem.sentence(),
+      score: Math.floor(Math.random()*4)+1,
+      tags: [],
+      coordinates: fakeCords(),
+      radius: 2000,
+      size: "1"
+    });
+  }
+  return fake;
+
+}
+
+
 function createUserType(number, userType,  password = "test" ){
   let users = [];
 
@@ -25,12 +45,8 @@ function createUserType(number, userType,  password = "test" ){
       email: faker.internet.email(name),
       avatar: faker.internet.avatar(),
       password: hashPass,
-      address: {
-        street: address.streetC,
-        city: address.city,
-        country: address.country,
-        coordinates: [Number(address.geo.lat), Number(address.geo.lng)],
-      },
+      coordinates: [Number(address.geo.lat), Number(address.geo.lng)],
+
       role: userType,
       itemsUser: [],
     });
@@ -39,7 +55,13 @@ function createUserType(number, userType,  password = "test" ){
 }
 
 
+const messages = fakeMessage(100);
+
 const usersData = createUserType(100, "User");
+Message.create(messages, (err, docs)=>{
+  if(err) throw err;
+  console.log(docs);
+});
 
 User.create(usersData, (err, docs)=> {
   if(err) throw err;
