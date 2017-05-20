@@ -11,4 +11,8 @@ router.get("/dashboard", (req, res, next)=>{
   res.render("dashboard");
 });
 
+router.get('/signup', function(req, res, next) {
+  res.render('users/signup', {account: req.body.account});
+});
+
 module.exports = router;
