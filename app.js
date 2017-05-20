@@ -8,7 +8,7 @@ var expressLayouts = require("express-ejs-layouts");
 
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+
 var apiRouter = require("./routes/apiController");
 
 const session = require("express-session");
@@ -58,7 +58,7 @@ app.set('layout', 'layouts/main-layout');
 
 app.use("/api", apiRouter);
 app.use('/', index);
-app.use('/users', users);
+
 
 app.use('/',authController);
 

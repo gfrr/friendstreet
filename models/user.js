@@ -9,13 +9,6 @@ const userSchema = new Schema({
   email: String,
   password: String,
   avatar: {type:String, default:""},
-  address:{
-    street: String,
-    postCode: String,
-    city: String,
-    country: String,
-    coordinates: [Number, Number] //lat and lng
-  },
   role: {
     type: String,
     enum: ['User','Business','City'],
