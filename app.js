@@ -6,11 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressLayouts = require("express-ejs-layouts");
 
-
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost:27017/friendstreet");
+
 
 app.use(expressLayouts);
 app.set('layout', 'layouts/main-layout');
@@ -27,7 +30,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(expressLayouts);
+app.set('layout', 'layouts/main-layout');
 app.use('/', index);
 app.use('/users', users);
 
