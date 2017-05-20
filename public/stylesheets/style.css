@@ -47,6 +47,10 @@ input {
   margin: 0 auto;
 }
 
+select {
+  height: 50px !important;
+}
+
 input[type="text"] {
   height: 50px !important;
 }
