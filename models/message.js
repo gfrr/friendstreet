@@ -17,6 +17,7 @@ const messageSchema = new Schema({
     enum: ["1","2","3"],
     default: "1"
   },
+  duration    : Number,
   userId: { type: Schema.Types.ObjectId, ref: 'User' }
 
 }, {timestamps: {
