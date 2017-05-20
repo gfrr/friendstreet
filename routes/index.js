@@ -5,6 +5,8 @@ const Message = require("../models/message");
 const User = require("../models/user");
 const auth = require('../helpers/auth-helpers');
 
+const moment  = require('moment');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -138,6 +140,7 @@ console.log("RADIUS ", radius, radiusNumber);
        res.redirect("/");
      }
    });
+ });
 
 // router.get('/messagesTemporal', function(req, res, next) {
 //   let longitude = 2.162862;
@@ -172,14 +175,22 @@ console.log("RADIUS ", radius, radiusNumber);
 
 
 // router.get('/messagesTemporal', function(req, res, next) {
-//   let defaultTime=undefined;
-//   Message.find({updatedAt : { $gte : new Date().getTime()-} }, function(err, docs){
-//       console.log(docs);
+//   console.log("hi");
+//   let defaultTime=1;
+//   // Message.find({updatedAt : { $gte : new Date().getTime()-} }, function(err, docs){
+//   //     console.log(docs);
+//   // });
+//   console.log("hi");
+//   Message.find({expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}}, function(err, results){
+//     if(err){
+//       console.log(err);
+//       return;
+//     }
+//       res.send(results);
+//       console.log(results);
 //   });
 //
 // });
 
-
-});
 
 module.exports = router;

@@ -5,6 +5,7 @@ const bcryptSalt = 10;
 const User = require("../models/user");
 const Message = require("../models/message");
 
+const moment  = require('moment');
 
 
 
@@ -76,12 +77,14 @@ let message={
   text: "test",
   score: 0,
   tags: [],
+  expirationDate: moment(new Date(new Date().getTime())).add({hours:2}),
   loc:{
     type: "Point",
     coordinates:  [2.191132, 41.397743],
   },
   radius: 5000,
 };
+
 
 
 
