@@ -6,8 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressLayouts = require("express-ejs-layouts");
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const session = require("express-session");
+const flash = require("connect-flash");
+const auth = require('./helpers/auth-helpers');
+const passport = require('./helpers/passport');
+
+var authController = require('./routes/auth-controller');
 
 var app = express();
 var mongoose = require("mongoose");
@@ -22,7 +26,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -31,9 +34,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
+
+app.use(session({
+  secret: "hackaton",
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.set('layout', 'layouts/main-layout');
-app.use('/', index);
-app.use('/users', users);
+app.use('/',authController);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

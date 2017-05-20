@@ -18,7 +18,7 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['User','Owner','Professional','Admin'],
+    enum: ['User','Business','City'],
     default: 'User'
   },
   messages: [{type: Schema.Types.ObjectId, ref: "Message"}]
