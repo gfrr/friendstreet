@@ -18,6 +18,7 @@ const messageSchema = new Schema({
     default: "1"
   },
   duration    : Number,
+  expirationDate: Date,
   userId: { type: Schema.Types.ObjectId, ref: 'User' }
 
 }, {timestamps: {
