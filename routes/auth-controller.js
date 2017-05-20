@@ -17,13 +17,13 @@ authController.get("/main", (req, res, next) => {
   res.render("maintemporal");
 });
 
-authController.get("/loginTemporal", (req, res, next) => {
-  res.render("logintemporal", {
+authController.get("/login", (req, res, next) => {
+  res.render("users/login", {
     "message": req.flash("error")
   });
 });
 
-authController.post("/loginTemporal", passport.authenticate("local",{
+authController.post("/login", passport.authenticate("local",{
   successRedirect: "/main",
   failureRedirect: "/login",
   failureFlash: true,
@@ -32,12 +32,12 @@ authController.post("/loginTemporal", passport.authenticate("local",{
 
 authController.get("/signup_i", (req,res,next)=>{
   console.log("hi");
-  res.render("signup_i");
+  res.render("users/signup_i");
 });
 
 authController.get("/signup_b", (req,res,next)=>{
   console.log("hi");
-  res.render("signup_b");
+  res.render("users/signup_b");
 });
 
 authController.post("/signup", (req,res,next)=>{
@@ -50,7 +50,7 @@ authController.post("/signup", (req,res,next)=>{
   console.log("hi2");
   if (email === "" || password === "") {
     if(role==='Business'){
-      res.render("signup_b", {
+      res.render("users/signup_b", {
         message: "Indicate email, password"
       });
       return;
@@ -65,7 +65,7 @@ authController.post("/signup", (req,res,next)=>{
   User.findOne({email:email}, (err, user) => {
     if (user !== null) {
       if(role==='Business'){
-        res.render("signup_b", {
+        res.render("users/signup_b", {
           message: "The username or email already exists"
         });
         return;
