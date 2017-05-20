@@ -8,7 +8,7 @@ var expressLayouts = require("express-ejs-layouts");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var apiRouter = require("./routes/api-controller");
+var apiRouter = require("./routes/apiController");
 
 var app = express();
 var mongoose = require("mongoose");
@@ -33,6 +33,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
 app.set('layout', 'layouts/main-layout');
+
+app.use("/api", apiRouter);
 app.use('/', index);
 app.use('/users', users);
 
