@@ -25,13 +25,13 @@ hr {
 }
 
 .container-fluid {
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
   text-align: center;
 }
 
 .row {
-  width: 50%;
+  width: 70%;
   margin: 10px;
 }
 
@@ -41,6 +41,10 @@ input {
 
 .center-style {
   margin: 0 auto;
+}
+
+input[type="text"] {
+  height: 50px !important;
 }
 
 input[type="checkbox"]{
