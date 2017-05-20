@@ -1,6 +1,7 @@
 <div class="container-fluid">
 
 <h2>Fill in the form to sign up and start connecting with your neighbours!</h2>
+<hr>
 <form>
   <fieldset>
     <div class="row">
@@ -23,9 +24,13 @@
       <input type="text" placeholder="Choose a secure password" id="password">
     </div>
   </div>
+<div class="row">
+  <div class="column">
 
-    <label for="address">Address</label>
-    <input type="text" placeholder="enter your full address in order to find your neighbourhood" id="address"></input>
+  <label for="address">Address</label>
+  <input type="text" placeholder="enter your full address in order to find your neighbourhood" id="address">
+</div>
+</div>
 
     <div class="row">
       <div class="column">
@@ -55,3 +60,5 @@
 </form>
 
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqe21EHro6EN_0N55_LePHR-tojoJOjoY&libraries=places"></script>
+<script type="text/javascript" src="./javascripts/autocomplete.js"></script>
