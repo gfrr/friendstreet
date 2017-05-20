@@ -10,7 +10,6 @@ const messageSchema = new Schema({
     type:{type:String},
     coordinates:[Number]
   },
-  coordinates : [Number, Number],
   radius      : {type:Number, default:2000},
   expire      : {type:Boolean, default:false},
   size        : {
