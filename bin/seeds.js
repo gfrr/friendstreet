@@ -11,7 +11,10 @@ const Message = require("../models/message");
 mongoose.connect("mongodb://localhost:27017/friendstreet");
 function fakeCords() {
 
-  return [(41.390205 - ((Math.random()* 100)/100)), (2.154007 - ((Math.random()* 100)/100))];
+  return{
+    type: "Point",
+    coordinates:  [(2.154007  - ((Math.random()* 100)/100)), (41.390205- ((Math.random()* 100)/100))],
+  };
 }
 
 function fakeMessage(max){
@@ -21,7 +24,7 @@ function fakeMessage(max){
       text: faker.lorem.sentence(),
       score: Math.floor(Math.random()*4)+1,
       tags: [],
-      coordinates: fakeCords(),
+      loc: fakeCords(),
       radius: 2000,
       size: "1"
     });
@@ -58,6 +61,7 @@ function createUserType(number, userType,  password = "test" ){
 const messages = fakeMessage(100);
 
 const usersData = createUserType(100, "User");
+
 Message.create(messages, (err, docs)=>{
   if(err) throw err;
   console.log(docs);
