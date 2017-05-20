@@ -8,10 +8,12 @@ const userSchema = new Schema({
   lastName: String,
   email: String,
   password: String,
-  avatar: {type:String, default:""},
+
+  coordinates: [Number, Number], //lat and lng
+
   role: {
     type: String,
-    enum: ['User','Business','City'],
+    enum: ['User','Business'],
     default: 'User'
   },
   messages: [{type: Schema.Types.ObjectId, ref: "Message"}]
