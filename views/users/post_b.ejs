@@ -1,47 +1,56 @@
 <div class="container-fluid">
 
-<h2>Fill in the form to sign up as a Business and Square your communication! </h2>
+<h2>Post a Square </h2>
 <hr>
 <form>
   <fieldset>
     <div class="row">
       <div class="column">
-      <label for="companyName">Name of Business/Company</label>
-      <input type="text" placeholder="Company's name" id="firstName">
-      </div>
-      <div class="column">
-      <label for="businessType">Type</label>
-      <input type="text" placeholder="Type of Business" id="lastName">
+      <label for="text">Message</label>
+      <input type="text" placeholder="Insert your message" id="text">
       </div>
     </div>
     <div class="row">
     <div class="column">
-      <label for="email">Email</label>
-      <input type="text" placeholder="Insert a valid email (will be your username)" id="email">
-    </div>
-    <div class="column">
-      <label for="password">Password</label>
-      <input type="text" placeholder="Choose a secure password" id="password">
+      <label for="tags">Tags</label>
+      <input type="text" placeholder="Insert tags separated by spaces" id="tags">
     </div>
   </div>
 
+
+  <div class="row">
+  <div class="column">
+    <label for="radius">Radius in KM</label>
+    <select name="radius">
+      <option value="short">3 km</option>
+      <option value="medium">10 km</option>
+      <option value="long">20 km</option>
+    </select>  </div>
+  <div class="column">
+    <label for="size">Ad Size</label>
+    <select name="size">
+      <option value="small">Small</option>
+      <option value="medium">Medium</option>
+      <option value="large">Large</option>
+    </select>
+  </div>
+  <div class="column">
+    <label for="duration">Length of Post</label>
+    <select name="duration">
+      <option value="short">4 hours</option>
+      <option value="medium">8 hours</option>
+      <option value="long">12 hours</option>
+    </select>
+  </div>
+</div>
+
     <div class="row">
       <div class="column">
-        <input class="button-primary" type="submit" value="Send">
+        <input class="button-primary" type="submit" value="Post">
       </div>
     </div>
   </fieldset>
 
-  <input type="hidden" id="account" name="account"></li>
-  <input type="hidden" id="street" name="street"></li>
-  <input type="hidden" id="postCode" name="postCode"></li>
-  <input type="hidden" id="city" name="city" ></li>
-  <input type="hidden" id="country" name="country"></li>
-  <input type="hidden" id="lat" name="lat"></li>
-  <input type="hidden" id="lng" name="lng"></li>
-
 </form>
 
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqe21EHro6EN_0N55_LePHR-tojoJOjoY&libraries=places"></script>
-<script type="text/javascript" src="./javascripts/autocomplete.js"></script>
