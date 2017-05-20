@@ -28,4 +28,4 @@ const messageSchema = new Schema({
 messageSchema.index({ "loc": "2dsphere" });
 
 const Message = mongoose.model("Message", messageSchema);
-module.exports = User;
+module.exports = Message;

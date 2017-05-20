@@ -14,18 +14,29 @@
         <div class="column">
         </div>
         <div class="column">
-          <input class="checkbox-style" type="radio" name="account" value="resident" checked> <br> Individual <br>
+          <input class="checkbox" id="individual" type="radio" name="account" value="individual" checked onclick="changeLink()"> <br> Individual <br>
         </div>
         <div class="column">
-          <input class="checkbox-style" type="radio" name="account" value="business"> <br> Business<br>
+          <input class="checkbox" id="business" type="radio" name="account" value="business" onclick="changeLink()"> <br> Business<br>
         </div>
         <div class="column">
         </div>
       </div>
-      <p>  <br><strong><a href="/signup">Register!</a></strong></p>
+      <p>  <br><strong><div id="register_link"> <a href="/signup_i">Register!</a></div></strong></p>
       </div>
     </div>
   </div>
+  <script type="text/javascript">
+function changeLink() {
+  if ($('#individual').is(':checked')) {
+    $('#register_link').replaceWith('<strong><a href=\"/signup_i\">Register!</a></strong>');
+  }
+  if ($('#business').is(':checked')) {
+    var link = "\"/signup_b\""
+    $('#register_link').replaceWith('<strong><a href=\"/signup_b\">Register!</a></strong>');
+  }
+}
+  </script>
 
   </body>
 </html>

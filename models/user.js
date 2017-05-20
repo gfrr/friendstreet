@@ -8,7 +8,9 @@ const userSchema = new Schema({
   lastName: String,
   email: String,
   password: String,
+
   coordinates: [Number, Number], //lat and lng
+
   role: {
     type: String,
     enum: ['User','Business'],
