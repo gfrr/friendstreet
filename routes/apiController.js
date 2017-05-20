@@ -27,6 +27,7 @@ router.get('/users/:user_id', (req, res) => {
 
 router.get("/messages", (req, res, next)=> {
 		Message.find((error, users) => {
+
 			if (error) res.status(500).json({message: error});
 			 else res.status(200).json(users);
 		});
