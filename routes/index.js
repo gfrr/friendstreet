@@ -35,7 +35,18 @@ router.post('/post_i', function(req, res, next) {
       text: text,
       tags: tags
     });
-  res.redirect("/");
+
+    console.log("this is the new post: ", newPost);
+
+    newPost.save((err) => {
+     if (err) {
+       res.render('users/post_i', {
+         errorMessage: "Something went wrong"
+       });
+     } else {
+       res.redirect("/");
+     }
+   });
 
 });
 
@@ -45,68 +56,87 @@ router.get('/post_b', function(req, res, next) {
 
 router.post('/post_b', function(req, res, next) {
 
-
-
   var tmpRadius = req.body.radius;
   var tmpSize = req.body.size;
   var tmpDuration = req.body.duration;
-  console.log(req.body.radius);
+  var radiusNumber;
+  console.log("tmpRadius ", tmpRadius);
+  console.log("tmpSize ", tmpSize);
 
   switch (tmpRadius) {
-    case "small":
-      tmpRadius = 3000;
+    case "short":
+      radiusNumber = 3000;
     break;
     case "medium":
-      tmpRadius = 10000;
+      radiusNumber = 10000;
     break;
     case "long":
-      tmpRadius = 20000;
+      radiusNumber = 20000;
     break;
   default:
   }
 
   switch (tmpSize) {
-    case "1":
-      tmpSize = 1;
+    case "small":
+      tmpSize = "1";
     break;
-    case "2":
-      tmpSize = 2;
+    case "medium":
+      tmpSize = "2";
     break;
-    case "3":
-      tmpSize = 3;
+    case "large":
+      tmpSize = "3";
     break;
   default:
   }
 
   switch (tmpDuration) {
-    case "1":
+    case "short":
       tmpDuration = 14400000;
     break;
-    case "2":
+    case "medium":
       tmpDuration = 28800000;
     break;
-    case "3":
+    case "long":
       tmpDuration = 43200000;
     break;
   default:
   }
 
-  const text = req.body.text.value;
+  const text = req.body.text;
   const tempTags = req.body.tags;
   const tags = tempTags.split(" ");
-  const radius = tmpRadius;
+  const radius = radiusNumber;
   const size = tmpSize;
   const duration = tmpDuration;
-
+console.log("RADIUS ", radius, radiusNumber);
 
     const newPost = Message({
-      text: text,
+      text: String(text),
+      score: 0,
       tags: tags,
+      loc: {
+        type:"Point",
+        coordinates:[0,0]
+      },
       radius: radius,
+      expire: false,
       size: size,
-      duration: duration
+      duration: Number(duration)
     });
-  res.redirect("/");
+
+    console.log("this is the new post: ", newPost);
+
+    newPost.save((err) => {
+     if (err) {
+       console.log(err);
+       res.render('users/post_b', {
+         errorMessage: "Something went wrong"
+       });
+     } else {
+       res.redirect("/");
+     }
+   });
+
 
 });
 
