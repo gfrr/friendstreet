@@ -2,26 +2,26 @@
 
 <h2>Fill in the form to sign up as a Business and Square your communication! </h2>
 <hr>
-<form>
+<form action="/signup" method="POST">
   <fieldset>
     <div class="row">
       <div class="column">
       <label for="companyName">Name of Business/Company</label>
-      <input type="text" placeholder="Company's name" id="firstName">
+      <input type="text" placeholder="Company's name" id="firstName" name="firstName">
       </div>
       <div class="column">
       <label for="businessType">Type</label>
-      <input type="text" placeholder="Type of Business" id="lastName">
+      <input type="text" placeholder="Type of Business" id="lastName" name="lastName">
       </div>
     </div>
     <div class="row">
     <div class="column">
       <label for="email">Email</label>
-      <input type="text" placeholder="Insert a valid email (will be your username)" id="email">
+      <input type="text" placeholder="Insert a valid email (will be your username)" id="email" name="email">
     </div>
     <div class="column">
       <label for="password">Password</label>
-      <input type="text" placeholder="Choose a secure password" id="password">
+      <input type="password" placeholder="Choose a secure password" id="password" name="password">
     </div>
   </div>
 
@@ -31,6 +31,8 @@
       </div>
     </div>
   </fieldset>
+
+  <input type="hidden" id="role" name="role" value="Business"></li>
 
 
 </form>

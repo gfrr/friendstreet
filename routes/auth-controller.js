@@ -13,7 +13,7 @@ const passport = require("passport");
 const auth = require('../helpers/auth-helpers');
 
 
-authController.get("/Temporal", (req, res, next) => {
+authController.get("/main", (req, res, next) => {
   res.render("maintemporal");
 });
 
@@ -30,47 +30,54 @@ authController.post("/loginTemporal", passport.authenticate("local",{
   passReqToCallback: true
 }));
 
-authController.get("/signupTemporal", (req,res,next)=>{
+authController.get("/signup_i", (req,res,next)=>{
   console.log("hi");
-  res.render("signuptemporal");
+  res.render("signup_i");
 });
 
-authController.post("/signupTemporal", (req,res,next)=>{
+authController.get("/signup_b", (req,res,next)=>{
+  console.log("hi");
+  res.render("signup_b");
+});
+
+authController.post("/signup", (req,res,next)=>{
+  console.log("hi");
   const firstName = req.body.firstName;
   const lastName  = req.body.lastName;
   const email     = req.body.email;
   const password  = req.body.password;
-  const avatar    = req.body.avatar;
   const role      = req.body.role;
-  const street    = req.body.street;
-  const postCode  = req.body.postCode;
-  const city      = req.body.city;
-  const lat       = req.body.lat;
-  const lng       = req.body.lng;
-
-  const address   = {
-    street      : street,
-    postCode    :postCode,
-    city        :city,
-    country     :country,
-    coordinates : [lat,lng]
-  };
-
+  console.log("hi2");
   if (email === "" || password === "") {
-    res.render("signuptemporal", {
-      message: "Indicate email, password"
-    });
-    return;
-  }
-
-  User.findOne({$or:[{username:username},{email:email}]}, "username email", (err, user) => {
-    if (user !== null) {
-      res.render("intranet/auth/signup", {
-        message: "The username or email already exists"
+    if(role==='Business'){
+      res.render("signup_b", {
+        message: "Indicate email, password"
       });
       return;
     }
 
+    res.render("signup_i", {
+      message: "Indicate email, password"
+    });
+    return;
+  }
+  console.log("hi3");
+  User.findOne({email:email}, (err, user) => {
+    if (user !== null) {
+      if(role==='Business'){
+        res.render("signup_b", {
+          message: "The username or email already exists"
+        });
+        return;
+      }
+
+      res.render("signup_i", {
+        message: "The username or email already exists"
+      });
+      return;
+
+    }
+    console.log("hi4");
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
 
@@ -79,87 +86,27 @@ authController.post("/signupTemporal", (req,res,next)=>{
       lastName    : lastName,
       email       : email,
       password    : hashPass,
-      avatar      : avatar,
-      role        : role,
-      address     : address,
-      coordinates : coordinates
+      role        : role
     });
-
+    console.log("hi5");
     newUser.save((err,user) => {
       if (err) {
-        res.render("signuptemporal", {
-          message: "Something went wrong"
+        if(role==='Business'){
+          res.render("signup_b", {
+            message: "Something went wrong"
+          });
+          return;
+        }
+
+        res.render("signup_i", {
+        message: "Something went wrong"
         });
-        return;
       }
+        res.redirect("/main");
+        console.log("hi5");
+        return;
     });
   });
 });
-
-// authController.get("/editTemporal", (req,res,next)=>{
-//   console.log("hi");
-//   res.render("signuptemporal");
-// });
-//
-// authController.post("/editTemporal", (req,res,next)=>{
-//   const firstName = req.body.firstName;
-//   const lastName  = req.body.lastName;
-//   const email     = req.body.email;
-//   const password  = req.body.password;
-//   const avatar    = req.body.avatar;
-//   const role      = req.body.role;
-//   const street    = req.body.street;
-//   const postCode  = req.body.postCode;
-//   const city      = req.body.city;
-//   const lat       = req.body.lat;
-//   const lng       = req.body.lng;
-//
-//   const address   = {
-//     street      : street,
-//     postCode    :postCode,
-//     city        :city,
-//     country     :country,
-//     coordinates : [lat,lng]
-//   };
-//
-//   if (email === "" || password === "") {
-//     res.render("signuptemporal", {
-//       message: "Indicate email, password"
-//     });
-//     return;
-//   }
-//
-//   User.findOne({$or:[{username:username},{email:email}]}, "username email", (err, user) => {
-//     if (user !== null) {
-//       res.render("intranet/auth/signup", {
-//         message: "The username or email already exists"
-//       });
-//       return;
-//     }
-//
-//     const salt = bcrypt.genSaltSync(bcryptSalt);
-//     const hashPass = bcrypt.hashSync(password, salt);
-//
-//     const newUser = User({
-//       firstName   : firstName,
-//       lastName    : lastName,
-//       email       : email,
-//       password    : hashPass,
-//       avatar      : avatar,
-//       role        : role,
-//       address     : address,
-//       coordinates : coordinates
-//     });
-//
-//     newUser.save((err,user) => {
-//       if (err) {
-//         res.render("signuptemporal", {
-//           message: "Something went wrong"
-//         });
-//         return;
-//       }
-//     });
-//   });
-// });
 
 module.exports = authController;

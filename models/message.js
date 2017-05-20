@@ -6,6 +6,10 @@ const messageSchema = new Schema({
   text        : String,
   score       : Number,
   tags        :[String],
+  loc         :{
+    type:{type:String},
+    coordinates:[Number]
+  },
   coordinates : [Number, Number],
   radius      : {type:Number, default:2000},
   expire      : {type:Boolean, default:false},
@@ -21,7 +25,7 @@ const messageSchema = new Schema({
   updatedAt: "updated_at"}
 });
 
-
+messageSchema.index({ "loc": "2dsphere" });
 
 const Message = mongoose.model("Message", messageSchema);
 module.exports = Message;
