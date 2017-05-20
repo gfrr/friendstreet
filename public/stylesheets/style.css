@@ -6,3 +6,63 @@
 a {
   color: #00B7FF;
 }*/
+
+h1, h2, h3, p {
+  text-align: center;
+}
+
+p {
+  font-size: 20px;
+}
+
+.logo {
+  height: 40px;
+}
+
+hr {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-fluid {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.row {
+  width: 50%;
+  margin: 10px;
+}
+
+input {
+  font-size: 18px;
+}
+
+.center-style {
+  margin: 0 auto;
+}
+
+input[type="checkbox"]{
+  width: 30px; /*Desired width*/
+  height: 30px; /*Desired height*/
+}
+
+input[type="radio"]{
+  width: 30px; /*Desired width*/
+  height: 30px; /*Desired height*/
+}
+
+.font-style {
+}
+
+.column {
+  margin: 0 auto;
+  font-size: 20px;
+  text-align: center;
+}
+
+button {
+  width: 40%;
+  height: 70px !important;
+}
