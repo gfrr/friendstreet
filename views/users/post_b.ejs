@@ -17,6 +17,12 @@
     </div>
   </div>
 
+  <div class="row">
+  <div class="column">
+    <label for="address">Address</label>
+    <input type="text" placeholder="Insert the full address in order to set the radius" id="address" name="address">
+  </div>
+  </div>
 
   <div class="row">
   <div class="column">
@@ -67,8 +73,14 @@
         <input class="button-primary" type="submit" value="Post">
       </div>
     </div>
+
+    <input type="text" id="lat" name="lat"></li>
+    <input type="text" id="lng" name="lng"></li>
+    
   </fieldset>
 </form>
+
+
 
 </div>
 <script type="text/javascript">
@@ -81,4 +93,16 @@ function updatePrice() {
     $('#register_link').replaceWith('<strong><a href=\"/signup_b\">Register!</a></strong>');
   }
 }
+$("#address").on('keyup', function (e) {
+  var input = document.getElementById('address');
+  google.maps.event.addDomListener(input, 'keydown', function(e) {
+    if (e.keyCode == 13) {
+        e.preventDefault();
+    }
+  });
+});
 </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiKGfGuXH1u1ltBIV2Sh46o-Zta1UgizU&libraries=places"></script>
+
+<script type="text/javascript" src="./javascripts/autocomplete.js"></script>
