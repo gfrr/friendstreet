@@ -103,13 +103,13 @@ router.post('/post_b', function(req, res, next) {
 
   switch (tmpDuration) {
     case "short":
-      tmpDuration = 14400000;
+      tmpDuration = 4;
     break;
     case "medium":
-      tmpDuration = 28800000;
+      tmpDuration = 8;
     break;
     case "long":
-      tmpDuration = 43200000;
+      tmpDuration = 12;
     break;
   default:
   }
