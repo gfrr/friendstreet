@@ -7,12 +7,8 @@ const auth = require('../helpers/auth-helpers');
 
 const moment  = require('moment');
 
-messageController.get("/dashboard", (req, res, next)=>{
-  Message.find((err, messages)=>{
-    if(err) next(err);
-    res.render("dashboard", {messages});
-  });
-
+messageController.get('/', auth.ifAlreadyLoggedIn('/dashboard'), function(req, res, next) {
+  res.render('index');
 });
 
 messageController.get('/post_i', function(req, res, next) {
@@ -22,18 +18,31 @@ messageController.get('/post_i', function(req, res, next) {
 messageController.post('/post_i', function(req, res, next) {
 
   const text = req.body.text;
-  const tempTags = req.body.tags;
-  const tags = tempTags.split(" ");
+  const tags = req.body.tags;
+  const coordinates = [];
+  coordinates.push(req.body.lat);
+  coordinates.push(req.body.lng);
 
-    const newPost = Message({
-      text: text,
-      tags: tags
-    });
+  const newPost = Message({
+    text: String(text),
+    score: 0,
+    tags: tags,
+    loc: {
+      type:"Point",
+      coordinates: coordinates
+    },
+    userId: req.user,
+    expirationDate: moment(new Date(new Date().getTime())).add({hours:1}),
+    expire: false,
+  });
+
+  console.log(newPost);
 
     console.log("this is the new post: ", newPost);
 
     newPost.save((err) => {
      if (err) {
+       console.log(err);
        res.render('users/post_i', {
          errorMessage: "Something went wrong"
        });
@@ -85,13 +94,13 @@ messageController.post('/post_b', function(req, res, next) {
 
   switch (tmpDuration) {
     case "short":
-      tmpDuration = 14400000;
+      tmpDuration = 4;
     break;
     case "medium":
-      tmpDuration = 28800000;
+      tmpDuration = 8;
     break;
     case "long":
-      tmpDuration = 43200000;
+      tmpDuration = 12;
     break;
   default:
   }
@@ -102,7 +111,10 @@ messageController.post('/post_b', function(req, res, next) {
   const radius = radiusNumber;
   const size = tmpSize;
   const duration = tmpDuration;
-console.log("RADIUS ", radius, radiusNumber);
+  const coordinates = [];
+  coordinates.push(req.body.lat);
+  coordinates.push(req.body.lng);
+  console.log("coordinates ", coordinates);
 
     const newPost = Message({
       text: String(text),
@@ -110,9 +122,11 @@ console.log("RADIUS ", radius, radiusNumber);
       tags: tags,
       loc: {
         type:"Point",
-        coordinates:[0,0]
+        coordinates: coordinates
       },
       radius: radius,
+      userId: req.user,
+      expirationDate: moment(new Date(new Date().getTime())).add({hours:Number(duration)}),
       expire: false,
       size: size,
       duration: Number(duration)
@@ -133,7 +147,7 @@ console.log("RADIUS ", radius, radiusNumber);
  });
 
 
-messageController.get('/messagesTemporal', function(req, res, next) {
+messageController.get('/dashboard', function(req, res, next) {
   let longitude = 2.162862;
   let latitude = 41.374865;
   let maxDistance = 4000;
@@ -152,7 +166,7 @@ messageController.get('/messagesTemporal', function(req, res, next) {
   const isScore = req.body.isScore;
 
   //Regular
-  Message.find({}).populate("userId").exec((error, results) => {
+  Message.find({}).populate("userId").exec((error, messages) => {
 		if (error) {
 			//res.status(500).json({message: error});
       //next(err);
@@ -162,8 +176,9 @@ messageController.get('/messagesTemporal', function(req, res, next) {
       // Route.populate(user, {
       //   path: 'routes'
       // }, (err, userPopulated) => {
-      console.log("messages",results);
-      res.send(results);
+      console.log("messages",messages);
+      //res.send(results);
+      res.render("dashboard", {messages});
 			//res.status(200).json(results);
       //razzmatazz
       // 41.397743, 2.191132
