@@ -17,7 +17,7 @@ const messageSchema = new Schema({
     enum: ["1","2","3"],
     default: "1"
   },
-  duration    : Number,
+  duration    : {type:Number, default:1},
   expirationDate: Date,
   userId: { type: Schema.Types.ObjectId, ref: 'User' }
 
