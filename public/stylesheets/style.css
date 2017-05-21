@@ -52,9 +52,10 @@ hr {
 }
 
 .vote {
-  width: 30px;
-  height: 30px;
-  background-color: red;
+  margin: 0, auto;
+  width: 30px !important;
+  height: 30px !important;
+
 }
 
 .container-fluid {
@@ -71,7 +72,8 @@ hr {
 .element {
   display: flex;
   flex-flow: column;
-
+  align-content:stretch;
+  align-content: flex-end;
   border: 1px solid purple;
 }
 
@@ -99,6 +101,10 @@ hr {
 .row {
   width: 70%;
   margin: 10px;
+}
+
+.footer {
+
 }
 
 .button-container {

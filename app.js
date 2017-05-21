@@ -51,7 +51,7 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(auth.setCurrentUser);
 app.set('layout', 'layouts/main-layout');
 
 
