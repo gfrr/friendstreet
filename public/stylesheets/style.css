@@ -71,7 +71,8 @@ hr {
 .element {
   display: flex;
   flex-flow: column;
-
+  align-content:stretch;
+  align-content: flex-end;
   border: 1px solid purple;
 }
 
@@ -99,6 +100,10 @@ hr {
 .row {
   width: 70%;
   margin: 10px;
+}
+
+.footer {
+
 }
 
 .button-container {

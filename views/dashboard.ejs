@@ -8,23 +8,23 @@
             <div class="cell<%=message.size%>"><p>
               <%= message.text %>
             </p>
-            <div class="button-container">
-              <a class="button" href="#"  />Donate</a>
-              <div class="voting">
-                <button  class="button test glyphicon glyphicon-chevron-up vote" id="+<%=message._id %>" value="<%= message.score %>" ></button>
-                <div class="score">
-                  <h6>
-                    <%= message.score %>
-                  </h6>
+            <p>
+              
+            </p>
+            <div class="footer">
+              <div class="button-container">
+                <a class="button" href="#"  />Donate</a>
+                <div class="voting">
+                  <button  class="button test glyphicon glyphicon-chevron-up vote" id="+<%=message._id %>" value="<%= message.score %>" ></button>
+                  <div class="score">
+                      <%= message.score %>
+                  </div>
+                  <button class="button  test glyphicon glyphicon-chevron-down vote" id="-<%=message._id %>" value="<%= message.score %>"></button>
                 </div>
-                <button class="button  test glyphicon glyphicon-chevron-down vote" id="-<%=message._id %>" value="<%= message.score %>"></button>
+
               </div>
-
             </div>
-
           </div>
-
-
           </div>
       <input type="hidden" id="messages" value=<%=messages%>>
     <% }) %>
