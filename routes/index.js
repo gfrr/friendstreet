@@ -56,7 +56,7 @@ router.post('/post_i', function(req, res, next) {
          errorMessage: "Something went wrong"
        });
      } else {
-       res.redirect("/");
+       res.redirect("/dashboard");
      }
    });
 
@@ -148,7 +148,7 @@ router.post('/post_b', function(req, res, next) {
          errorMessage: "Something went wrong"
        });
      } else {
-       res.redirect("/");
+       res.redirect("/dashboard");
      }
    });
  });

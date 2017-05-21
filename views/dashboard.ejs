@@ -39,12 +39,10 @@
   <div class="main">
     <% messages.forEach((message) => { %>
           <div class="element ">
-            <div class="cell<%=message.size%>"><p>
+            <div class="cell<%=message.size%>"><p class="font-size-post<%=message.size%>">
               <%= message.text %>
             </p>
-            <p>
 
-            </p>
             <div class="footer">
               <div class="button-container">
                 <a class="button" href="#"  />Donate</a>
@@ -70,6 +68,7 @@
           </div>
           </div>
       <input type="hidden" id="messages" value=<%=messages%>>
-    <% }) %>
   </div>
+  <% }) %>
+
 </div>
