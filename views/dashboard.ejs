@@ -20,9 +20,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="post_i">Post Free</a></li>
+          <% if(typeof(currentUser)!== "undefined"){ %>
         <% if (currentUser.role === "Business") { %>
         <li><a href="post_b">Post Premium</a></li>
-        <% } %>
+        <% } }%>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if(!isUserLoggedIn){ %>
