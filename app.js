@@ -13,7 +13,7 @@ const auth = require('./helpers/auth-helpers');
 const passport = require('./helpers/passport');
 
 var authController = require('./routes/auth-controller');
-var index = require('./routes/index');
+//var index = require('./routes/index');
 var apiRouter = require("./routes/api-controller");
 var messageController = require("./routes/message-controller");
 
@@ -56,7 +56,7 @@ app.set('layout', 'layouts/main-layout');
 
 
 app.use("/api", apiRouter);
-app.use('/', index);
+//app.use('/', index);
 app.use('/',authController);
 app.use('/', messageController);
 

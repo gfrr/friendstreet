@@ -157,37 +157,6 @@ router.post('/post_b', function(req, res, next) {
  });
 
 
-// router.get('/messagesTemporal', function(req, res, next) {
-//   let longitude = 2.162862;
-//   let latitude = 41.374865;
-//   let maxDistance = 4000;
-//   let defaultTime=-10;
-//   Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance }).find({expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}},(error, results) => {
-// 		if (error) {
-// 			//res.status(500).json({message: error});
-//       //next(err);
-//       console.log(err);
-//       return;
-// 		} else {
-//       console.log("messages",results);
-//       results = results.filter((result)=>{
-//         console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
-//         let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
-//         console.log("distance "+ distance+" result.radius "+ result.radius);
-//         if(distance<result.radius){
-//           return result;
-//         }
-//       });
-//       console.log("messages",results);
-//       res.send(results);
-// 			//res.status(200).json(results);
-//       //razzmatazz
-//       // 41.397743, 2.191132
-//       //paralel
-//       // 41.374865, 2.162862
-// 		}
-// 	});
-// });
 
 
 module.exports = router;
