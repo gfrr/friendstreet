@@ -145,5 +145,8 @@ button {
 
 .button, .button-primary {
   font-size: 18px !important;
+}
 
+.icon-color {
+  color: #9B4DCA;
 }
