@@ -152,13 +152,16 @@ messageController.get('/messagesTemporal', function(req, res, next) {
   const isScore = req.body.isScore;
 
   //Regular
-  Message.find({},(error, results) => {
+  Message.find({}).populate("userId").exec((error, results) => {
 		if (error) {
 			//res.status(500).json({message: error});
       //next(err);
       console.log(err);
       return;
 		} else {
+      // Route.populate(user, {
+      //   path: 'routes'
+      // }, (err, userPopulated) => {
       console.log("messages",results);
       res.send(results);
 			//res.status(200).json(results);
@@ -170,158 +173,158 @@ messageController.get('/messagesTemporal', function(req, res, next) {
 	});
 
   //Location
-  Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance },(error, results) => {
-		if (error) {
-			//res.status(500).json({message: error});
-      //next(err);
-      console.log(err);
-      return;
-		} else {
-      console.log("messages",results);
-      results = results.filter((result)=>{
-        console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
-        let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
-        console.log("distance "+ distance+" result.radius "+ result.radius);
-        if(distance<result.radius){
-          return result;
-        }
-      });
-      console.log("messages",results);
-      res.send(results);
-			//res.status(200).json(results);
-      //razzmatazz
-      // 41.397743, 2.191132
-      //paralel
-      // 41.374865, 2.162862
-		}
-	});
-
-  //Time
-  Message.find({expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}},(error, results) => {
-		if (error) {
-			//res.status(500).json({message: error});
-      //next(err);
-      console.log(err);
-      return;
-		} else {
-      console.log("messages",results);
-      res.send(results);
-			//res.status(200).json(results);
-      //razzmatazz
-      // 41.397743, 2.191132
-      //paralel
-      // 41.374865, 2.162862
-		}
-	});
-
-  //Time+Location
-  Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance }).find({expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}},(error, results) => {
-		if (error) {
-			//res.status(500).json({message: error});
-      //next(err);
-      console.log(err);
-      return;
-		} else {
-      console.log("messages",results);
-      results = results.filter((result)=>{
-        console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
-        let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
-        console.log("distance "+ distance+" result.radius "+ result.radius);
-        if(distance<result.radius){
-          return result;
-        }
-      });
-      console.log("messages",results);
-      res.send(results);
-			//res.status(200).json(results);
-      //razzmatazz
-      // 41.397743, 2.191132
-      //paralel
-      // 41.374865, 2.162862
-		}
-	});
-
-  //Time+Location+Hash
-  Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance }).find({$and:[{ $or:querySelector},{expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}}]},(error, results) => {
-		if (error) {
-			//res.status(500).json({message: error});
-      //next(err);
-      console.log(err);
-      return;
-		} else {
-      console.log("messages",results);
-      results = results.filter((result)=>{
-        console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
-        let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
-        console.log("distance "+ distance+" result.radius "+ result.radius);
-        if(distance<result.radius){
-          return result;
-        }
-      });
-      console.log("messages",results);
-      res.send(results);
-			//res.status(200).json(results);
-      //razzmatazz
-      // 41.397743, 2.191132
-      //paralel
-      // 41.374865, 2.162862
-		}
-	});
-
-  //Time+Location+Score
-  Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance }).find({expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}}).sort({score: -1}).exec((error, results)=> {
-		if (error) {
-			//res.status(500).json({message: error});
-      //next(err);
-      console.log(err);
-      return;
-		} else {
-      console.log("messages",results);
-      results = results.filter((result)=>{
-        console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
-        let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
-        console.log("distance "+ distance+" result.radius "+ result.radius);
-        if(distance<result.radius){
-          return result;
-        }
-      });
-      console.log("messages",results);
-      res.send(results);
-			//res.status(200).json(results);
-      //razzmatazz
-      // 41.397743, 2.191132
-      //paralel
-      // 41.374865, 2.162862
-		}
-	});
-
-  //Time+Location+Hash+Score
-  Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance }).find({$and:[{ $or:querySelector},{expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}}]}).sort({score: -1}).exec((error, results)=> {
-		if (error) {
-			//res.status(500).json({message: error});
-      //next(err);
-      console.log("hi");
-      console.log(err);
-      return;
-		} else {
-      console.log("messages",results);
-      results = results.filter((result)=>{
-        console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
-        let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
-        console.log("distance "+ distance+" result.radius "+ result.radius);
-        if(distance<result.radius){
-          return result;
-        }
-      });
-      console.log("messages",results);
-      res.send(results);
-			//res.status(200).json(results);
-      //razzmatazz
-      // 41.397743, 2.191132
-      //paralel
-      // 41.374865, 2.162862
-		}
-	});
+  // Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance },(error, results) => {
+	// 	if (error) {
+	// 		//res.status(500).json({message: error});
+  //     //next(err);
+  //     console.log(err);
+  //     return;
+	// 	} else {
+  //     console.log("messages",results);
+  //     results = results.filter((result)=>{
+  //       console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
+  //       let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
+  //       console.log("distance "+ distance+" result.radius "+ result.radius);
+  //       if(distance<result.radius){
+  //         return result;
+  //       }
+  //     });
+  //     console.log("messages",results);
+  //     res.send(results);
+	// 		//res.status(200).json(results);
+  //     //razzmatazz
+  //     // 41.397743, 2.191132
+  //     //paralel
+  //     // 41.374865, 2.162862
+	// 	}
+	// });
+  //
+  // //Time
+  // Message.find({expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}},(error, results) => {
+	// 	if (error) {
+	// 		//res.status(500).json({message: error});
+  //     //next(err);
+  //     console.log(err);
+  //     return;
+	// 	} else {
+  //     console.log("messages",results);
+  //     res.send(results);
+	// 		//res.status(200).json(results);
+  //     //razzmatazz
+  //     // 41.397743, 2.191132
+  //     //paralel
+  //     // 41.374865, 2.162862
+	// 	}
+	// });
+  //
+  // //Time+Location
+  // Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance }).find({expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}},(error, results) => {
+	// 	if (error) {
+	// 		//res.status(500).json({message: error});
+  //     //next(err);
+  //     console.log(err);
+  //     return;
+	// 	} else {
+  //     console.log("messages",results);
+  //     results = results.filter((result)=>{
+  //       console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
+  //       let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
+  //       console.log("distance "+ distance+" result.radius "+ result.radius);
+  //       if(distance<result.radius){
+  //         return result;
+  //       }
+  //     });
+  //     console.log("messages",results);
+  //     res.send(results);
+	// 		//res.status(200).json(results);
+  //     //razzmatazz
+  //     // 41.397743, 2.191132
+  //     //paralel
+  //     // 41.374865, 2.162862
+	// 	}
+	// });
+  //
+  // //Time+Location+Hash
+  // Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance }).find({$and:[{ $or:querySelector},{expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}}]},(error, results) => {
+	// 	if (error) {
+	// 		//res.status(500).json({message: error});
+  //     //next(err);
+  //     console.log(err);
+  //     return;
+	// 	} else {
+  //     console.log("messages",results);
+  //     results = results.filter((result)=>{
+  //       console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
+  //       let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
+  //       console.log("distance "+ distance+" result.radius "+ result.radius);
+  //       if(distance<result.radius){
+  //         return result;
+  //       }
+  //     });
+  //     console.log("messages",results);
+  //     res.send(results);
+	// 		//res.status(200).json(results);
+  //     //razzmatazz
+  //     // 41.397743, 2.191132
+  //     //paralel
+  //     // 41.374865, 2.162862
+	// 	}
+	// });
+  //
+  // //Time+Location+Score
+  // Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance }).find({expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}}).sort({score: -1}).exec((error, results)=> {
+	// 	if (error) {
+	// 		//res.status(500).json({message: error});
+  //     //next(err);
+  //     console.log(err);
+  //     return;
+	// 	} else {
+  //     console.log("messages",results);
+  //     results = results.filter((result)=>{
+  //       console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
+  //       let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
+  //       console.log("distance "+ distance+" result.radius "+ result.radius);
+  //       if(distance<result.radius){
+  //         return result;
+  //       }
+  //     });
+  //     console.log("messages",results);
+  //     res.send(results);
+	// 		//res.status(200).json(results);
+  //     //razzmatazz
+  //     // 41.397743, 2.191132
+  //     //paralel
+  //     // 41.374865, 2.162862
+	// 	}
+	// });
+  //
+  // //Time+Location+Hash+Score
+  // Message.where('loc').near({ center: { coordinates: [longitude, latitude], type: 'Point' }, maxDistance: maxDistance }).find({$and:[{ $or:querySelector},{expirationDate : { $gte : moment(new Date(new Date().getTime())).add({hours:defaultTime})}}]}).sort({score: -1}).exec((error, results)=> {
+	// 	if (error) {
+	// 		//res.status(500).json({message: error});
+  //     //next(err);
+  //     console.log("hi");
+  //     console.log(err);
+  //     return;
+	// 	} else {
+  //     console.log("messages",results);
+  //     results = results.filter((result)=>{
+  //       console.log("result.loc.coordinates[0]  "+result.loc.coordinates[0]+" result.loc.coordinates[1]  "+result.loc.coordinates[1]+" result.radius "+result.radius);
+  //       let distance = auth.getDistance(result.loc.coordinates[1],result.loc.coordinates[0],latitude,longitude);
+  //       console.log("distance "+ distance+" result.radius "+ result.radius);
+  //       if(distance<result.radius){
+  //         return result;
+  //       }
+  //     });
+  //     console.log("messages",results);
+  //     res.send(results);
+	// 		//res.status(200).json(results);
+  //     //razzmatazz
+  //     // 41.397743, 2.191132
+  //     //paralel
+  //     // 41.374865, 2.162862
+	// 	}
+	// });
 });
 
 module.exports = messageController;

@@ -9,7 +9,7 @@ const moment  = require('moment');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', auth.ifAlreadyLoggedIn('/dashboard'), function(req, res, next) {
   res.render('index');
 });
 
@@ -28,8 +28,7 @@ router.get('/post_i', function(req, res, next) {
 router.post('/post_i', function(req, res, next) {
 
   const text = req.body.text;
-  const tempTags = req.body.tags;
-  const tags = tempTags.split(" ");
+  const tags = req.body.tags;
   const coordinates = [];
   coordinates.push(req.body.lat);
   coordinates.push(req.body.lng);
@@ -42,6 +41,8 @@ router.post('/post_i', function(req, res, next) {
       type:"Point",
       coordinates: coordinates
     },
+    userId: req.user,
+    expirationDate: moment(new Date(new Date().getTime())).add({hours:1}),
     expire: false,
   });
 
@@ -134,6 +135,8 @@ router.post('/post_b', function(req, res, next) {
         coordinates: coordinates
       },
       radius: radius,
+      userId: req.user,
+      expirationDate: moment(new Date(new Date().getTime())).add({hours:Number(duration)}),
       expire: false,
       size: size,
       duration: Number(duration)
