@@ -49,7 +49,12 @@ router.get("/messages", (req, res, next)=> {
 		console.log(req.body);
 		Message.findByIdAndUpdate(req.params.message_id, req.body, {new: true}, (err, message)=>{
 			if(err) res.status(500).json({message: err});
-			else res.status(200).json("message updated");
+			User.findByIdAndUpdate(req.user.id, {$push: {messagesVoted: req.params.message_id}}, {new: true}, (error, message)=>{
+				if(error) res.status(500).json({message: error});
+				else res.status(200).json("message updated");
+
+			});
+
 		});
 	});
 

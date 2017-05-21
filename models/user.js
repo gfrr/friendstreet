@@ -16,7 +16,8 @@ const userSchema = new Schema({
     enum: ['User','Business'],
     default: 'User'
   },
-  messages: [{type: Schema.Types.ObjectId, ref: "Message"}]
+  messages: [{type: Schema.Types.ObjectId, ref: "Message"}],
+  messagesVoted:[{type: Schema.Types.ObjectId, ref: "Message"}],
 });
 
 
