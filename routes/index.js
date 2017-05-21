@@ -34,16 +34,28 @@ router.post('/post_i', function(req, res, next) {
   const text = req.body.text;
   const tempTags = req.body.tags;
   const tags = tempTags.split(" ");
+  const coordinates = [];
+  coordinates.push(req.body.lat);
+  coordinates.push(req.body.lng);
 
-    const newPost = Message({
-      text: text,
-      tags: tags
-    });
+  const newPost = Message({
+    text: String(text),
+    score: 0,
+    tags: tags,
+    loc: {
+      type:"Point",
+      coordinates: coordinates
+    },
+    expire: false,
+  });
+
+  console.log(newPost);
 
     console.log("this is the new post: ", newPost);
 
     newPost.save((err) => {
      if (err) {
+       console.log(err);
        res.render('users/post_i', {
          errorMessage: "Something went wrong"
        });
@@ -113,8 +125,6 @@ router.post('/post_b', function(req, res, next) {
   const size = tmpSize;
   const duration = tmpDuration;
   const coordinates = [];
-  // console.log("lat: ", req.body.lat);
-  // console.log("lng: ", req.body.lng);
   coordinates.push(req.body.lat);
   coordinates.push(req.body.lng);
   console.log("coordinates ", coordinates);

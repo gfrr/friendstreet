@@ -2,18 +2,18 @@
 
 <h2>Post a Square </h2>
 <hr>
-<form>
+<form action="/post_i" method="post">
   <fieldset>
     <div class="row">
       <div class="column">
       <label for="text">Message</label>
-      <input type="text" placeholder="Insert your message" id="text">
+      <input type="text" placeholder="Insert your message" id="text" name="text">
       </div>
     </div>
     <div class="row">
     <div class="column">
       <label for="tags">Tags</label>
-      <input type="text" placeholder="Insert tags separated by spaces" id="tags">
+      <input type="text" placeholder="Insert tags separated by spaces" id="tags" name="tags">
     </div>
   </div>
 
@@ -22,8 +22,15 @@
         <input class="button-primary" type="submit" value="Post">
       </div>
     </div>
+
+    <input type="hidden" id="lat" name="lat"></li>
+    <input type="hidden" id="lng" name="lng"></li>
   </fieldset>
 
 </form>
 
 </div>
+
+<script src="./javascripts/geolocation.js">
+
+</script>
