@@ -5,7 +5,7 @@ const User = require("./user");
 const messageSchema = new Schema({
   text        : String,
   score       : Number,
-  tags        :[String],
+  tags        : String,
   loc         :{
     type:{type:String},
     coordinates:[Number]

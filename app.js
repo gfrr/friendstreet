@@ -7,16 +7,15 @@ var bodyParser = require('body-parser');
 var expressLayouts = require("express-ejs-layouts");
 
 
-var index = require('./routes/index');
-
-var apiRouter = require("./routes/api-controller");
-
 const session = require("express-session");
 const flash = require("connect-flash");
 const auth = require('./helpers/auth-helpers');
 const passport = require('./helpers/passport');
 
 var authController = require('./routes/auth-controller');
+var index = require('./routes/index');
+var apiRouter = require("./routes/api-controller");
+var messageController = require("./routes/message-controller");
 
 
 var app = express();
@@ -58,11 +57,8 @@ app.set('layout', 'layouts/main-layout');
 
 app.use("/api", apiRouter);
 app.use('/', index);
-
-
 app.use('/',authController);
-
-
+app.use('/', messageController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
