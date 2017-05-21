@@ -73,8 +73,8 @@ mongoose.connect("mongodb://localhost:27017/friendstreet");
 //   mongoose.connection.close();
 // });
 
-let message={
-  text: "test",
+let message0={
+  text: "test0",
   score: 0,
   tags: "hello papa como are you",
   expirationDate: moment(new Date(new Date().getTime())).add({hours:2}),
@@ -85,18 +85,48 @@ let message={
   radius: 5000,
 };
 
+let message1={
+  text: "test1",
+  score: 1,
+  tags: "caquita",
+  expirationDate: moment(new Date(new Date().getTime())).add({hours:2}),
+  loc:{
+    type: "Point",
+    coordinates:  [2.191132, 41.397743],
+  },
+  radius: 5000,
+};
 
+let message2={
+  text: "test2",
+  score: 2,
+  tags: "pedito",
+  expirationDate: moment(new Date(new Date().getTime())).add({hours:2}),
+  loc:{
+    type: "Point",
+    coordinates:  [2.191132, 41.397743],
+  },
+  radius: 5000,
+};
 
-
-
-
-Message.create(message, (err, docs)=>{
+Message.create(message0, (err, docs)=>{
   if(err) throw err;
   console.log(docs);
-  mongoose.connection.close();
+  Message.create(message1, (err, docs)=>{
+    if(err) throw err;
+    console.log(docs);
+    Message.create(message2, (err, docs)=>{
+      if(err) throw err;
+      console.log(docs);
+      mongoose.connection.close();
+    });
+  });
 });
 
-// User.create(userData, (err, docs)=> {
+
+
+// Message.create(message0, (err, docs)=>{
 //   if(err) throw err;
+//   console.log(docs);
 //   mongoose.connection.close();
 // });
