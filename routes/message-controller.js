@@ -176,6 +176,7 @@ messageController.get('/dashboard', function(req, res, next) {
       // Route.populate(user, {
       //   path: 'routes'
       // }, (err, userPopulated) => {
+      console.log("hi");
       console.log("messages",messages);
       //res.send(results);
       res.render("dashboard", {messages});
