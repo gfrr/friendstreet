@@ -112,7 +112,12 @@ router.post('/post_b', function(req, res, next) {
   const radius = radiusNumber;
   const size = tmpSize;
   const duration = tmpDuration;
-console.log("RADIUS ", radius, radiusNumber);
+  const coordinates = [];
+  // console.log("lat: ", req.body.lat);
+  // console.log("lng: ", req.body.lng);
+  coordinates.push(req.body.lat);
+  coordinates.push(req.body.lng);
+  console.log("coordinates ", coordinates);
 
     const newPost = Message({
       text: String(text),
@@ -120,7 +125,7 @@ console.log("RADIUS ", radius, radiusNumber);
       tags: tags,
       loc: {
         type:"Point",
-        coordinates:[0,0]
+        coordinates: coordinates
       },
       radius: radius,
       expire: false,
