@@ -1,8 +1,5 @@
 <script src="./javascripts/APIHandler.js"></script>
 <script src="./javascripts/ajaxcalls.js"></script>
-
-
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,7 +12,6 @@
       </button>
       <a class="navbar-brand" href="#"><div class="material-icons icon-style">view_quilt</div></a>
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -34,7 +30,6 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
 <div class=container>
   <div class="main">
     <% messages.forEach((message) => { %>
@@ -43,19 +38,22 @@
               <%= message.text %>
             </p>
             <p>
-
+              <%if(message.userId.role==='Business'){%>
+              <%= message.userId.firstName %>
+            <%}else{%>
+                Anonymous
+            <%}%>
+            </p>
+            <p>
             </p>
             <div class="footer">
               <div class="button-container">
                 <a class="button" href="#"  />Donate</a>
-
                 <div class="voting">
                   <% if(typeof(currentUser)!== "undefined"){ %>
                   <% var votes = currentUser.messagesVoted.filter((elem)=> String(elem) == String(message._id)); %>
-
                   <% var hidden = 0; %>
                   <% if(votes.length > 0) hidden = 1 %>
-
                   <% if(!hidden) { %>
                   <button  class="button test glyphicon glyphicon-chevron-up vote" id="+<%=message._id %>" value="<%= message.score %>" ></button>
                   <% } %>
@@ -70,6 +68,6 @@
           </div>
           </div>
       <input type="hidden" id="messages" value=<%=messages%>>
-    <% }) %>
   </div>
+    <% }) %>
 </div>
