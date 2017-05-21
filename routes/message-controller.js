@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var messageController = express.Router();
 const passport = require('../helpers/passport');
 const Message = require("../models/message");
 const User = require("../models/user");
@@ -7,13 +7,7 @@ const auth = require('../helpers/auth-helpers');
 
 const moment  = require('moment');
 
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
-
-router.get("/dashboard", (req, res, next)=>{
+messageController.get("/dashboard", (req, res, next)=>{
   Message.find((err, messages)=>{
     if(err) next(err);
     res.render("dashboard", {messages});
@@ -21,11 +15,11 @@ router.get("/dashboard", (req, res, next)=>{
 
 });
 
-router.get('/post_i', function(req, res, next) {
+messageController.get('/post_i', function(req, res, next) {
   res.render('users/post_i');
 });
 
-router.post('/post_i', function(req, res, next) {
+messageController.post('/post_i', function(req, res, next) {
 
   const text = req.body.text;
   const tempTags = req.body.tags;
@@ -50,11 +44,11 @@ router.post('/post_i', function(req, res, next) {
 
 });
 
-router.get('/post_b', function(req, res, next) {
+messageController.get('/post_b', function(req, res, next) {
   res.render('users/post_b');
 });
 
-router.post('/post_b', function(req, res, next) {
+messageController.post('/post_b', function(req, res, next) {
 
   var tmpRadius = req.body.radius;
   var tmpSize = req.body.size;
@@ -138,8 +132,8 @@ console.log("RADIUS ", radius, radiusNumber);
    });
  });
 
-
-// router.get('/messagesTemporal', function(req, res, next) {
+////{ $and: [{tag_list:{$regex: 'social-networking'}},
+// messageController.get('/messagesTemporal', function(req, res, next) {
 //   let longitude = 2.162862;
 //   let latitude = 41.374865;
 //   let maxDistance = 4000;
@@ -171,5 +165,33 @@ console.log("RADIUS ", radius, radiusNumber);
 // 	});
 // });
 
+// {
+//   $text:
+//     {
+//       $search: <string>,
+//       $language: <string>,
+//       $caseSensitive: <boolean>,
+//       $diacriticSensitive: <boolean>
+//     }
+// }
+//{ $and: [{tag_list:{$regex: 'social-networking'}},
 
-module.exports = router;
+messageController.get('/messagesTemporal', function(req, res, next) {
+  // const tempTags = req.body.tags;
+  tempTags = "papa are";
+  const tags = tempTags.split(" ");
+  querySelector = tags.map((tag)=>{
+    return {tags:{$regex: tag }};
+  });
+  console.log("querySelector",querySelector);
+  Message.find({ $or:querySelector},(err,results)=>{
+    if(err){
+      console.log(err);
+      return;
+    }
+    console.log(results);
+    res.send(results);
+  });
+});
+
+module.exports = messageController;

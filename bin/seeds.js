@@ -76,7 +76,7 @@ mongoose.connect("mongodb://localhost:27017/friendstreet");
 let message={
   text: "test",
   score: 0,
-  tags: [],
+  tags: "hello papa como are you",
   expirationDate: moment(new Date(new Date().getTime())).add({hours:2}),
   loc:{
     type: "Point",
