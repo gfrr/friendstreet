@@ -24,7 +24,8 @@ authController.get("/login", (req, res, next) => {
 });
 
 authController.post("/login", passport.authenticate("local",{
-  successRedirect: "/main",
+  // successRedirect: "/main",
+  successRedirect: "/dashboard",
   failureRedirect: "/login",
   failureFlash: true,
   passReqToCallback: true
@@ -102,11 +103,16 @@ authController.post("/signup", (req,res,next)=>{
         message: "Something went wrong"
         });
       }
-        res.redirect("/main");
+        res.redirect("/login");
         console.log("hi5");
         return;
     });
   });
+});
+
+authController.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/login");
 });
 
 module.exports = authController;
