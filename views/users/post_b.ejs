@@ -27,7 +27,7 @@
   <div class="row">
   <div class="column">
     <label for="radius">Radius in KM</label>
-    <select name="radius">
+    <select id="radius" name="radius">
       <option value="short">3 km</option>
       <option value="medium">10 km</option>
       <option value="long">20 km</option>
@@ -35,7 +35,7 @@
 
   <div class="column">
     <label for="size">Ad Size</label>
-    <select name="size">
+    <select id="size" name="size">
       <option value="small">Small</option>
       <option value="medium">Medium</option>
       <option value="large">Large</option>
@@ -43,7 +43,7 @@
   </div>
   <div class="column">
     <label for="duration">Length of Post</label>
-    <select name="duration">
+    <select id="duration" name="duration">
       <option value="short">4 hours</option>
       <option value="medium">8 hours</option>
       <option value="long">12 hours</option>
@@ -54,16 +54,16 @@
 <div class="row">
 <div class="column">
   <label for="radius">Cost</label>
-  <p id="priceRadius">0</p>
+  <div id="priceRadius"><p>€1.00</p></div>
 </div>
 
 <div class="column">
   <label for="size">Cost</label>
-  <p id="priceSize">0</p>
+  <div id="priceSize"><p>€1.00</p></div>
 </div>
 <div class="column">
   <label for="duration">Cost</label>
-  <p id="priceDuration">0</p>
+  <div id="priceDuration"><p>€1.00</p></div>
 </div>
 </div>
 
@@ -84,15 +84,42 @@
 
 </div>
 <script type="text/javascript">
-function updatePrice() {
-  if ($('#individual').is(':checked')) {
-    $('#register_link').replaceWith('<strong><a href=\"/signup_i\">Register!</a></strong>');
+function updatePriceR() {
+  if ($('#radius').val() === 'short') {
+    $('#priceRadius').replaceWith("<p>€1.00</p>");
   }
-  if ($('#business').is(':checked')) {
-    var link = "\"/signup_b\""
-    $('#register_link').replaceWith('<strong><a href=\"/signup_b\">Register!</a></strong>');
+  if ($('#radius').val() === 'medium') {
+    $('#priceRadius').replaceWith("<p>€2.00</p>");
+  }
+  if ($('#radius').val() === 'long') {
+    $('#priceRadius').replaceWith("<p>€3.00</p>");
   }
 }
+
+function updatePriceS() {
+  if ($('#size').val() === 'small') {
+    $('#priceSize').replaceWith("<p>€1.00</p>");
+  }
+  if ($('#size').val() === 'medium') {
+    $('#priceSize').replaceWith("<p>€2.00</p>");
+  }
+  if ($('#size').val() === 'large') {
+    $('#priceSize').replaceWith("<p>€3.00</p>");
+  }
+}
+
+function updatePriceD() {
+  if ($('#duration').val() === 'short') {
+    $('#priceDuration').replaceWith("<p>€1.00</p>");
+  }
+  if ($('#duration').val() === 'medium') {
+    $('#priceDuration').replaceWith("<p>€2.00</p>");
+  }
+  if ($('#duration').val() === 'long') {
+    $('#priceDuration').replaceWith("<p>€3.00</p>");
+  }
+}
+
 $("#address").on('keyup', function (e) {
   var input = document.getElementById('address');
   google.maps.event.addDomListener(input, 'keydown', function(e) {
@@ -104,5 +131,5 @@ $("#address").on('keyup', function (e) {
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiKGfGuXH1u1ltBIV2Sh46o-Zta1UgizU&libraries=places"></script>
-
+<script type="text/javascript" src="./javascripts/pricing.js"></script>
 <script type="text/javascript" src="./javascripts/autocomplete.js"></script>
