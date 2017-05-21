@@ -11,11 +11,13 @@
             <div class="button-container">
               <a class="button" href="#"  />Donate</a>
               <div class="voting">
-                <a class="button glyphicon glyphicon-chevron-up" href="#"></a>
-                <h6>
-                  <%= message.score %>
-                </h6>
-                <a class="button glyphicon glyphicon-chevron-down" href="#"></a>
+                <button  class="button test glyphicon glyphicon-chevron-up vote" id="+<%=message._id %>" value="<%= message.score %>" ></button>
+                <div class="score">
+                  <h6>
+                    <%= message.score %>
+                  </h6>
+                </div>
+                <button class="button  test glyphicon glyphicon-chevron-down vote" id="-<%=message._id %>" value="<%= message.score %>"></button>
               </div>
 
             </div>
@@ -24,6 +26,7 @@
 
 
           </div>
+      <input type="hidden" id="messages" value=<%=messages%>>
     <% }) %>
   </div>
 </div>

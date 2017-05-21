@@ -45,8 +45,16 @@ hr {
 }
 
 .voting {
+  justify-content: space-around;
+  display: flex;
   height: 80px;
   width: 200px;
+}
+
+.vote {
+  width: 30px;
+  height: 30px;
+  background-color: red;
 }
 
 .container-fluid {

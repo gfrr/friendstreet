@@ -22,7 +22,7 @@ class APIHandler {
 
   getOneRegister (types, id, callback = undefined) {
     $.ajax ({
-      url: this.BASE_URL + "/api/" + type + "/" + String(id),
+      url: this.BASE_URL + "/api/" + types + "/" + String(id),
       method: "GET",
       dataType: "json",
       success: (response)=> {
@@ -49,7 +49,7 @@ class APIHandler {
 
   deleteOneRegister (types, id) {
     $.ajax ({
-      url: this.BASE_URL + "/api/" + type + "/" + String(id),
+      url: this.BASE_URL + "/api/" + types + "/" + String(id),
       method: "DELETE",
       success: ()=> console.log(`${id} deleted`),
       error: (error) => console.log(error),
@@ -58,7 +58,7 @@ class APIHandler {
 
   updateOneRegister (types, id, userData) {
     $.ajax ({
-      url: this.BASE_URL + "/api/" + type + "/" + String(id),
+      url: this.BASE_URL + "/api/" + types + "/" + String(id),
       method: "PATCH",
       data: userData,
       error: (error)=> console.log("patching failed")

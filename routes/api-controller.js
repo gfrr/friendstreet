@@ -34,5 +34,24 @@ router.get("/messages", (req, res, next)=> {
 	});
 
 
+	router.get('/messages/:message_id', (req, res) => {
+			Message.findById(req.params.message_id, (error, message) => {
+				if (error) res.status(500).json({message: error});
+				 else {
+					console.log(message);
+					res.status(200).json(message);
+				}
+			});
+		});
+
+
+	router.patch('/messages/:message_id', (req, res)=> {
+		console.log(req.body);
+		Message.findByIdAndUpdate(req.params.message_id, req.body, {new: true}, (err, message)=>{
+			if(err) res.status(500).json({message: err});
+			else res.status(200).json("message updated");
+		});
+	});
+
 
 module.exports = router;
