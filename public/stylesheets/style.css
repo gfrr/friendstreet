@@ -80,26 +80,26 @@ hr {
 .cell1 {
   /*flex: 1;*/
   color: black;
-  height: 150px;
+  min-height: 150px;
   font-size: 20px;
-  background-color: white;
+  background-color: rgb(179, 156, 193);
 }
 
 .cell2{
 
-  height: 250px;
+  min-height: 250px;
   /*flex:4;*/
   color: black;
-  background-color: white;
+  background-color: rgb(196, 177, 207);
   font-size: 20px;
 
 }
 
 .cell3{
   /*flex:6;*/
-  height: 400px;
+  min-height: 400px;
   color: black;
-  background-color: white;
+  background-color: rgb(229, 213, 237);
   font-size: 20px;
 
 }
@@ -109,7 +109,10 @@ hr {
 }
 
 .footer {
-
+  height: 50px;
+  margin-bottom: 0px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .button-container {
@@ -174,12 +177,15 @@ button {
 
 .font-size-post1 {
   font-size: 25px;
+  min-height: 120px;
 }
 
 .font-size-post2 {
   font-size: 50px;
+  min-height: 200px;
 }
 
 .font-size-post3 {
-  font-size: 75px;
+  font-size: 65px;
+  min-height: 400px;
 }
