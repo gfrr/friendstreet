@@ -1,8 +1,191 @@
-body {
+/*body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}*/
+
+/* Larger than mobile screen */
+@media (min-width: 40.0rem) { ... }
+
+/* Larger than tablet screen */
+@media (min-width: 80.0rem) { ... }
+
+/* Larger than desktop screen */
+@media (min-width: 120.0rem) { ... }
+
+*{
+  box-sizing: border-box;
+
 }
 
 a {
-  color: #00B7FF;
+  font-size: 28px;
+}
+
+
+
+h1, h2, h3, p {
+  text-align: center;
+}
+
+p {
+  font-size: 20px;
+}
+
+label {
+  font-size: 20px !important;
+}
+
+.logo {
+  height: 40px;
+}
+
+hr {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.voting {
+  justify-content: space-around;
+  display: flex;
+  height: 80px;
+  width: 200px;
+}
+
+.vote {
+  margin: 0, auto;
+  width: 30px !important;
+  height: 30px !important;
+
+}
+
+.container-fluid {
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  flex-flow: column;
+}
+
+.element {
+  display: flex;
+  flex-flow: column;
+  align-content:stretch;
+  align-content: flex-end;
+  border: 1px solid purple;
+}
+
+.cell1 {
+  /*flex: 1;*/
+  color: black;
+  min-height: 150px;
+  font-size: 20px;
+  background-color: rgb(179, 156, 193);
+}
+
+.cell2{
+
+  min-height: 250px;
+  /*flex:4;*/
+  color: black;
+  background-color: rgb(196, 177, 207);
+  font-size: 20px;
+
+}
+
+.cell3{
+  /*flex:6;*/
+  min-height: 400px;
+  color: black;
+  background-color: rgb(229, 213, 237);
+  font-size: 20px;
+
+}
+.row {
+  width: 70%;
+  margin: 10px;
+}
+
+.footer {
+  height: 50px;
+  margin-bottom: 0px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  font-size: 18px;
+}
+
+.center-style {
+  margin: 0 auto;
+}
+
+select {
+  height: 50px !important;
+}
+
+input[type="text"] {
+  height: 50px !important;
+}
+
+input[type="checkbox"]{
+  width: 30px; /*Desired width*/
+  height: 30px; /*Desired height*/
+}
+
+input[type="radio"]{
+  width: 30px; /*Desired width*/
+  height: 30px; /*Desired height*/
+}
+
+input[type="password"]{
+  height: 50px !important;/*Desired height*/
+}
+
+.font-style {
+}
+
+.column {
+  margin: 0 auto;
+  font-size: 20px;
+  text-align: center;
+}
+
+button {
+  font-size: 18px !important;
+  width: 40%;
+  height: 70px !important;
+}
+
+.button, .button-primary {
+  font-size: 18px !important;
+}
+
+.icon-style {
+  color: #9B4DCA;
+  font-size: 50px !important;
+  margin-top: -10px;
+}
+
+.font-size-post1 {
+  font-size: 25px;
+  min-height: 120px;
+}
+
+.font-size-post2 {
+  font-size: 50px;
+  min-height: 200px;
+}
+
+.font-size-post3 {
+  font-size: 65px;
+  min-height: 400px;
 }
